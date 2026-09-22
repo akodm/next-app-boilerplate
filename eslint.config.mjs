@@ -6,9 +6,9 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import jsxa11y from 'eslint-plugin-jsx-a11y';
 import prettier from 'eslint-plugin-prettier';
 import noRelativeImportPaths from 'eslint-plugin-no-relative-import-paths';
-import { globalIgnores } from 'eslint/config';
+import { defineConfig, globalIgnores } from 'eslint/config';
 
-export default tseslint.config(
+export default defineConfig(
   globalIgnores([
     'node_modules',
     'dist',
