@@ -3,31 +3,33 @@ import tseslint from 'typescript-eslint';
 import eslintConfigPrettier from 'eslint-config-prettier/flat';
 import pluginReact from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
-import jsxa11y from 'eslint-plugin-jsx-a11y';
-import prettier from 'eslint-plugin-prettier';
 import noRelativeImportPaths from 'eslint-plugin-no-relative-import-paths';
-import { defineConfig, globalIgnores } from 'eslint/config';
+import { globalIgnores, defineConfig } from 'eslint/config';
 
 export default defineConfig(
-  globalIgnores([
-    'node_modules',
-    'dist',
-    '*.config.{js,mjs}',
-    '**/.next',
-    '*sitemap.{js,mjs}',
-    '**/*.d.ts',
-    '**/*.txt',
-    '**/*.md',
-  ]),
-  eslint.configs.recommended,
-  tseslint.configs.recommended,
-  tseslint.configs.stylistic,
-  pluginReact.configs.flat.recommended,
-  pluginReact.configs.flat['jsx-runtime'],
-  reactHooks.configs['recommended-latest'],
-  jsxa11y.flatConfigs.recommended,
-  eslintConfigPrettier,
+  [
+    globalIgnores([
+      '**/*.gen.ts',
+      '*.config.{js,mjs,ts}',
+      '**/.next',
+      '*sitemap.{js,mjs,ts}',
+      '**/*.d.ts',
+      '**/*.txt',
+    ]),
+  ],
   {
+    extends: [
+      eslint.configs.recommended,
+      tseslint.configs.recommended,
+      tseslint.configs.stylistic,
+      pluginReact.configs.flat.recommended,
+      pluginReact.configs.flat['jsx-runtime'],
+      eslintConfigPrettier,
+    ],
+    plugins: {
+      'no-relative-import-paths': noRelativeImportPaths,
+      'react-hooks': reactHooks,
+    },
     rules: {
       'no-nested-ternary': 'error',
       'no-unneeded-ternary': 'error',
@@ -43,19 +45,22 @@ export default defineConfig(
           readonly: 'array-simple',
         },
       ],
-    },
-  },
-  {
-    plugins: {
-      'no-relative-import-paths': noRelativeImportPaths,
-      prettier: prettier,
-    },
-    rules: {
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          args: 'all',
+          argsIgnorePattern: '^_',
+          caughtErrors: 'all',
+          caughtErrorsIgnorePattern: '^_',
+          destructuredArrayIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          ignoreRestSiblings: true,
+        },
+      ],
       'no-relative-import-paths/no-relative-import-paths': 'error',
-      'prettier/prettier': 'error',
+      ...reactHooks.configs.recommended.rules,
+      'react-hooks/set-state-in-effect': 'off',
     },
-  },
-  {
     settings: {
       react: {
         version: 'detect',

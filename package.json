@@ -8,17 +8,22 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "pnpm i18n:compile && next build",
     "start": "next start",
-    "eslint": "eslint . --ext .ts,.tsx,.js,.jsx --cache --fix"
+    "eslint": "eslint . --ext .ts,.tsx,.js,.jsx --cache --fix",
+    "i18n:extract": "lingui extract --clean",
+    "i18n:compile": "lingui compile"
   },
   "dependencies": {
+    "@lingui/core": "^6.7.0",
+    "@lingui/react": "^6.7.0",
     "@vercel/analytics": "^2.0.1",
     "@vercel/blob": "^2.8.0",
     "@vercel/speed-insights": "^2.0.0",
     "dayjs": "^1.11.23",
     "embla-carousel-react": "^8.6.0",
     "motion": "^13.4.0",
+    "negotiator": "^1.1.0",
     "next": "16.3.5",
     "qs": "^6.16.0",
     "react": "19.3.0",
@@ -27,24 +32,26 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.4",
-    "@eslint/js": "^9.39.3",
+    "@eslint/js": "^9.39.5",
+    "@lingui/cli": "^6.7.0",
+    "@lingui/loader": "^6.7.0",
+    "@lingui/swc-plugin": "6.6.0",
     "@tailwindcss/postcss": "^4",
+    "@types/negotiator": "^0.6.5",
     "@types/node": "^20",
     "@types/qs": "^6.15.1",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "eslint": "^9",
-    "eslint-config-next": "15.5.12",
+    "eslint-config-next": "16.2.11",
     "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-no-relative-import-paths": "^1.6.1",
-    "eslint-plugin-prettier": "^5.5.5",
     "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
     "husky": "^9.1.7",
-    "prettier": "^3.8.1",
+    "prettier": "^3.9.6",
     "tailwindcss": "^4",
     "typescript": "^5",
-    "typescript-eslint": "^8.56.1"
+    "typescript-eslint": "^8.68.0"
   }
 }
